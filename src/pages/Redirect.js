@@ -7,23 +7,23 @@ const LoginHandler = () => {
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    return () => {
-      const kakaoLogin = async () => {
-        try {
+    const kakaoLogin = async () => {
+      try {
+        if (code) {
           const user = await auth.login(code);
-
+  
           localStorage.setItem('accessToken', user.accessToken);
           localStorage.setItem('refreshToken', user.refreshToken);
           localStorage.setItem('login', user.accessToken? true: false);
-
-          navigate("/");
-        } catch (error) {
-          console.error(error);
-        }
-      };
   
-      kakaoLogin();
-    }
+          navigate("/");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    kakaoLogin();
   }, [code]);
 
   return (

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
 import KakaoButton from "./kakao/button"
 import user from '../services/user'
 
@@ -28,48 +27,74 @@ const LogoDiv = styled.div`
 `;
 
 const LogoImg = styled.img`
-  width: 71px;
-  height: 71px;
+    width: 71px;
+    height: 71px;
 `;
 
 const Logo = styled.div`
-  color: #000000;
-  font-family: 'Aldrich', sans-serif;
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 21.52px;
+    color: #000000;
+    font-family: 'Aldrich', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 21.52px;
 `;
 
-const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
-  color: black;
-  font-size: 40px;
+const ProfileDiv = styled.div`
+    display: flex;
+    align-items: center;
+`;
 
-  cursor: pointer;
+const NickName = styled.div`
+    color: #000000;
+    font-family: 'Aldrich', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 15.65px;
+    user-select: none;
+`;
 
-  margin: 25px 10px 0px 0px;
+const ProfileImg = styled.img`
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
 `;
 
 const Header = () => {
+    const [profile, setProfile] = useState([]);
+
+    const login = localStorage.getItem('login');
     useEffect(() => {
         return async () => {
-            const login = localStorage.getItem('login');
-
             if (login) {
                 const profile = await user.getProfile();
-                console.log(profile);
+                setProfile(profile.result);
             }
         }
 
     }, []);
 
+    const navigate = useNavigate();
+    const handleLogoClick = () => {
+        navigate("/");
+    };
+
     return (
         <Background>
             <Container>
-                <LogoDiv>
+                <LogoDiv onClick={handleLogoClick}>
                     <LogoImg src="/assets/logo.svg" alt="" />
                     <Logo>co-letter</Logo>
                 </LogoDiv>
-                {localStorage.getItem("login")? <StyledFontAwesomeIcon icon={faBars} />: <KakaoButton></KakaoButton>}
+                {localStorage.getItem("login")? 
+                <ProfileDiv>
+                    <NickName>{profile.memberNickName} 님</NickName>
+                    <ProfileImg src={profile.memberProfileImage}></ProfileImg>
+                </ProfileDiv>: 
+                <KakaoButton type="header"></KakaoButton>}
             </Container>
         </Background>
     );
