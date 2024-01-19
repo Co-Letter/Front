@@ -50,7 +50,6 @@ const NickName = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 15.65px;
-    user-select: none;
 `;
 
 const ProfileImg = styled.img`
