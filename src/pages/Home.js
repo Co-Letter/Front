@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Header from "../components/Header"
+import MainMenu from "../components/MainMenu"
 
 const Container = styled.div`
     width: 100%;
@@ -14,6 +15,7 @@ function Home() {
     return (
         <Container>
             <Header />
+            <MainMenu />
         </Container>
     );
   }

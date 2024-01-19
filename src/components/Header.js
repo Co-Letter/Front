@@ -63,7 +63,7 @@ const ProfileImg = styled.img`
     cursor: pointer;
 `;
 
-const Header = () => {
+function Header() {
     const [profile, setProfile] = useState([]);
 
     const login = localStorage.getItem('login');
