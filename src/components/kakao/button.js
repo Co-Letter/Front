@@ -8,8 +8,8 @@ const HeaderDiv = styled.div`
 
 const HeaderText = styled.div`
     color: #000000;
-    font-family: 'Aldrich', sans-serif;
-    font-size: 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
     font-weight: 400;
     line-height: 15.65px;
     user-select: none;
@@ -29,7 +29,7 @@ function KakaoButton({type}) {
 
     return(
         <>
-        {type == "header" ? <HeaderDiv onClick={handleLogin}><HeaderText>로그인</HeaderText></HeaderDiv> : <button onClick={handleLogin}>카카오 로그인</button>}
+        {type === "header" ? <HeaderDiv onClick={handleLogin}><HeaderText>카카오로 로그인하기</HeaderText></HeaderDiv> : handleLogin()}
         </>
     )
 }

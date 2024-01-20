@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import KakaoButton from "./kakao/button"
 
 const MainWrapper = styled.div`
     display: flex;
@@ -7,7 +9,7 @@ const MainWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-    width: 1280px;
+    min-width: 1280px;
 
     display: flex;
     justify-content: space-between;
@@ -78,8 +80,14 @@ const WrapperInner = styled.div`
 `;
 
 function MainMenu() {  
+    const navigate = useNavigate();
     const handleCoLetter = () => {
-        window.alert("연결중.");
+        if (localStorage.getItem("login")) {
+            navigate('/mailbox');
+        }
+        else {
+            KakaoButton({type: "mainMenu"});
+        }
     } 
 
     const handleDoLetter = () => {

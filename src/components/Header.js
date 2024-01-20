@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import KakaoButton from "./kakao/button"
 import user from '../services/user'
+import HeaderMenu from "./HeaderMenu";
 
 const Background = styled.div`
     width: 100%;
@@ -14,7 +15,7 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
-    width: 1280px;
+    min-width: 1280px;
     
     display: flex;
     justify-content: space-between;
@@ -46,20 +47,10 @@ const ProfileDiv = styled.div`
 
 const NickName = styled.div`
     color: #000000;
-    font-family: 'Aldrich', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 15.65px;
-`;
-
-const ProfileImg = styled.img`
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
 `;
 
 function Header() {
@@ -90,8 +81,8 @@ function Header() {
                 </LogoDiv>
                 {localStorage.getItem("login")? 
                 <ProfileDiv>
-                    <NickName>{profile.memberNickName} 님</NickName>
-                    <ProfileImg src={profile.memberProfileImage}></ProfileImg>
+                    <NickName>{profile.memberNickName} 님</NickName>                    
+                    <HeaderMenu imgUrl={profile.memberProfileImage}></HeaderMenu>
                 </ProfileDiv>: 
                 <KakaoButton type="header"></KakaoButton>}
             </Container>
