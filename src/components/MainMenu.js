@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import KakaoButton from "./kakao/button"
 
@@ -82,17 +83,20 @@ const WrapperInner = styled.div`
 function MainMenu() {  
     const navigate = useNavigate();
     const handleCoLetter = () => {
-        if (localStorage.getItem("login")) {
+        if (data.login) {
             navigate('/mailbox');
         }
         else {
             KakaoButton({type: "mainMenu"});
         }
-    } 
+    }; 
 
     const handleDoLetter = () => {
         window.alert("준비중입니다.");
-    } 
+    };
+
+    const data = useSelector((state) => state.user);
+
     return(
         <MainWrapper>
           <Wrapper>
@@ -103,7 +107,7 @@ function MainMenu() {
                 <div className="imageDiv">
                 <img src="assets/CoLetter_image.png" alt="CoLetter Image" className="image"/>
                 </div>
-                <div className="btn" onClick={handleCoLetter}>내 편지함 만들기&nbsp;&nbsp;&nbsp;&gt;</div>
+                <div className="btn" onClick={handleCoLetter}>{data.login?(<span>내 편지함 보기&nbsp;&nbsp;&nbsp;&gt;</span>):(<span>내 편지함 만들기&nbsp;&nbsp;&nbsp;&gt;</span>)}</div>
             </WrapperInner>
             
             <WrapperInner>

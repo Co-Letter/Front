@@ -23,13 +23,14 @@ function KakaoButton({type}) {
     const redirect_uri = 'http://localhost:8080/auth'
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
     
-    const handleLogin = ()=>{
+    const handleLogin = () => {
+        console.log("click");
         window.location.href = kakaoURL
     }
 
     return(
         <>
-        {type === "header" ? <HeaderDiv onClick={handleLogin}><HeaderText>카카오로 로그인하기</HeaderText></HeaderDiv> : handleLogin()}
+        {type === "header" ? <HeaderDiv onClick={handleLogin}><HeaderText>로그인</HeaderText></HeaderDiv> : handleLogin()}
         </>
     )
 }

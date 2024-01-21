@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import KakaoButton from "./kakao/button"
-import user from '../services/user'
 import HeaderMenu from "./HeaderMenu";
+import { useSelector, useDispatch } from "react-redux";
+import user from '../services/user'
+import KakaoButton from "./kakao/button"
 
 const Background = styled.div`
     width: 100%;
@@ -40,6 +41,23 @@ const Logo = styled.div`
     line-height: 21.52px;
 `;
 
+const HeaderDiv = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const HeaderText = styled.div`
+    color: #000000;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 15.65px;
+    user-select: none;
+
+    margin-right: 10px;
+    cursor: pointer;
+`;
+
 const ProfileDiv = styled.div`
     display: flex;
     align-items: center;
@@ -54,17 +72,22 @@ const NickName = styled.div`
 `;
 
 function Header() {
-    const [profile, setProfile] = useState([]);
-
-    const login = localStorage.getItem('login');
+    const data = useSelector((state) => state.user);
+    const dispatch = useDispatch();
     useEffect(() => {
-        return async () => {
-            if (login) {
-                const profile = await user.getProfile();
-                setProfile(profile.result);
+        const fetchData = async () => {
+            try {
+                if (data.login) {
+                    const profile = await user.getProfile(data.accessToken);
+                    const userData = profile.result;
+                    dispatch({ type: 'user/SET_USER_DATA', userData });
+                }
+            } catch (error) {
+                console.error("Error fetching profile:", error);
             }
-        }
-
+        };
+    
+        fetchData();
     }, []);
 
     const navigate = useNavigate();
@@ -79,11 +102,12 @@ function Header() {
                     <LogoImg src="/assets/logo.svg" alt="" />
                     <Logo>co-letter</Logo>
                 </LogoDiv>
-                {localStorage.getItem("login")? 
+                {data.login? 
                 <ProfileDiv>
-                    <NickName>{profile.memberNickName} 님</NickName>                    
-                    <HeaderMenu imgUrl={profile.memberProfileImage}></HeaderMenu>
-                </ProfileDiv>: 
+                    <NickName>{data.data.memberNickName} 님</NickName>                    
+                    <HeaderMenu imgUrl={data.data.memberProfileImage}></HeaderMenu>
+                </ProfileDiv>
+                :
                 <KakaoButton type="header"></KakaoButton>}
             </Container>
         </Background>

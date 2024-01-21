@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Header from "../components/Header"
 import MainMenu from "../components/MainMenu"
+import KakaoModal from "../components/kakao/modal"
 
 const Container = styled.div`
     width: 100%;
@@ -13,10 +14,13 @@ const Container = styled.div`
 
 function Home() {  
     return (
+        <>
         <Container>
             <Header />
             <MainMenu />
         </Container>
+        {/* <KakaoModal/> */}
+        </>
     );
   }
   

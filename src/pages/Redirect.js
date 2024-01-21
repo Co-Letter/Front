@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import auth from '../services/auth'
 
 const LoginHandler = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get("code");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const kakaoLogin = async () => {
       try {
         if (code) {
-          const user = await auth.login(code);
-  
-          localStorage.setItem('accessToken', user.accessToken);
-          localStorage.setItem('refreshToken', user.refreshToken);
-          localStorage.setItem('login', user.accessToken? true: false);
-  
+          const userToken = await auth.login(code);
+          dispatch({ type: 'user/SET_USER_TOKEN', userToken });
+
           navigate("/");
         }
       } catch (error) {
@@ -24,7 +24,7 @@ const LoginHandler = () => {
     };
 
     kakaoLogin();
-  }, [code]);
+  }, [code, dispatch]);
 
   return (
     <div className="LoginHandeler">

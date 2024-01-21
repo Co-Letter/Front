@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const ProfileImg = styled.img`
@@ -85,17 +86,19 @@ function HeaderMenu({imgUrl}) {
     };
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const logout = async () => {
-        // await auth.logout();
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('login');
+        dispatch({ type: 'user/RESET_USER_DATA' });
         navigate('/');
     };
 
     const handleMailbox = () => {
         navigate('/mailbox');
     };
+
+    const handleDescription = () => {
+        window.alert("추후 노션 연결 예정");
+    }
 
     return (
         <div>
@@ -107,7 +110,7 @@ function HeaderMenu({imgUrl}) {
                         <MenuItem href="" onClick={handleMailbox}>
                             내 편지함
                         </MenuItem>
-                        <MenuItem href="">
+                        <MenuItem href="" onClick={handleDescription}>
                             코레터 소개
                         </MenuItem>
                         <MenuItem href="" onClick={logout}>

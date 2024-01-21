@@ -1,9 +1,7 @@
 const url = 'http://3.36.88.85:8080';
 
-exports.getProfile = async () => {
+exports.getProfile = async (accessToken) => {
   try {
-    const accessToken = localStorage.getItem('accessToken');
-
     const response = await fetch(`${url}/api/member/profile`, {
       method: 'GET',
       headers: {
