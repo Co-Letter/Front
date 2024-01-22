@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareNodes, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
@@ -18,14 +19,20 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.input`
-    min-width: calc(1148px - 20px);
-    height: calc(80px - 20px);
+    min-width: calc(1148px - 40px);
+    height: calc(80px - 40px);
     font-size: 32px;
 
-    padding: 10px;
-    
+    padding: 20px;
     border: 0px;
     border-radius: 10px;
+
+    color: #333333;
+    font-family: 'Noto Sans KR', sans-serif;
+    
+    &:focus {
+        outline: none;
+    }
 `
 
 const ButtonContainer = styled.div`
@@ -33,6 +40,8 @@ const ButtonContainer = styled.div`
     height: 55px;
     background-color: white;
     border-radius: 50%;
+
+    cursor: pointer;
 `
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
@@ -54,16 +63,34 @@ const ContentBox = styled.div`
 `
 
 function MailboxContent() {
+    const url = window.location.href;
+    const navigate = useNavigate();
+    const handleShare = () => {
+        navigator.clipboard.writeText(url)
+            .then(() => {
+                window.alert('공유 링크 복사 성공');
+            })
+            .catch((error) => {
+                console.error('Failed to copy text to clipboard:', error);
+            });
+    }
+
+    const handleWrite = () => {
+        const parts = url.split('/');
+        const id = parts[parts.length - 1];
+        navigate(`/write/${id}`);
+    }
+
     return(
         <div>
         <MainWrapper>
             <Wrapper>
-                <Title></Title>
+                <Title placeholder="편지함 제목을 입력해주세요."></Title>
                 <ButtonContainer>
-                <StyledFontAwesomeIcon icon={faShareNodes} />
+                <StyledFontAwesomeIcon icon={faShareNodes} onClick={handleShare} />
                 </ButtonContainer>
                 <ButtonContainer>
-                <StyledFontAwesomeIcon icon={faPenToSquare} />
+                <StyledFontAwesomeIcon icon={faPenToSquare} onClick={handleWrite} />
                 </ButtonContainer>
             </Wrapper>
         </MainWrapper>

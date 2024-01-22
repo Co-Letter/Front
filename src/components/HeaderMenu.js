@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const ProfileImg = styled.img`
@@ -92,8 +92,11 @@ function HeaderMenu({imgUrl}) {
         navigate('/');
     };
 
+    const data = useSelector((state) => state.user);
+
     const handleMailbox = () => {
-        navigate('/mailbox');
+        const id = data.data.memberId;
+        navigate(`/mailbox/${id}`);
     };
 
     const handleDescription = () => {

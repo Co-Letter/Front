@@ -24,7 +24,7 @@ const LoginHandler = () => {
     };
 
     kakaoLogin();
-  }, [code, dispatch]);
+  }, [code, dispatch, navigate]);
 
   return (
     <div className="LoginHandeler">

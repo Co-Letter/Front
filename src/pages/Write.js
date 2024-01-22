@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Header from "../components/Header"
-import MainMenu from "../components/MainMenu"
-// import KakaoModal from "../components/kakao/modal"
+import MailboxWrite from '../components/MailboxWrite';
 
 const Container = styled.div`
     width: 100%;
@@ -12,16 +11,13 @@ const Container = styled.div`
     margin: 0px;
 `;
 
-function Home() {  
+function Write() {  
     return (
-        <>
         <Container>
             <Header />
-            <MainMenu />
+            <MailboxWrite />
         </Container>
-        {/* <KakaoModal/> */}
-        </>
     );
   }
   
-  export default Home;
+  export default Write;

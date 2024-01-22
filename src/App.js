@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Redirect from './pages/Redirect'
 import Mailbox from './pages/Mailbox'
+import Write from './pages/Write';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Redirect />} />
-        <Route path="/mailbox" element={<Mailbox />} />
+        <Route path="/mailbox/:mailboxId" element={<Mailbox />} />
+        <Route path="/write/:mailboxId" element={<Write />} />
         {/* <Route path='*' element={<NotFound />} /> */}
       </Routes>
     </BrowserRouter>

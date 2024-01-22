@@ -81,10 +81,12 @@ const WrapperInner = styled.div`
 `;
 
 function MainMenu() {  
+    const data = useSelector((state) => state.user);
     const navigate = useNavigate();
     const handleCoLetter = () => {
         if (data.login) {
-            navigate('/mailbox');
+            const id = data.data.memberId;
+            navigate(`/mailbox/${id}`);
         }
         else {
             KakaoButton({type: "mainMenu"});
@@ -95,8 +97,6 @@ function MainMenu() {
         window.alert("준비중입니다.");
     };
 
-    const data = useSelector((state) => state.user);
-
     return(
         <MainWrapper>
           <Wrapper>
@@ -105,7 +105,7 @@ function MainMenu() {
                 <div className="title">Co-Letter</div>
                 <div className="description">소중한 사람에게 전하고 싶은 메시지를 남겨보세요.</div>
                 <div className="imageDiv">
-                <img src="assets/CoLetter_image.png" alt="CoLetter Image" className="image"/>
+                <img src="assets/CoLetter_image.png" alt="co-letter" className="image"/>
                 </div>
                 <div className="btn" onClick={handleCoLetter}>{data.login?(<span>내 편지함 보기&nbsp;&nbsp;&nbsp;&gt;</span>):(<span>내 편지함 만들기&nbsp;&nbsp;&nbsp;&gt;</span>)}</div>
             </WrapperInner>
@@ -115,7 +115,7 @@ function MainMenu() {
                 <div className="title">Do-Letter</div>
                 <div className="description">당신이 남긴 메시지가 누군가에겐 희망이 됩니다.</div>                
                 <div className="imageDiv">
-                <img src="assets/DoLetter_image.png" alt="Do-Letter Image" className="image"/>
+                <img src="assets/DoLetter_image.png" alt="do-letter" className="image"/>
                 </div>
                 <div className="btn" onClick={handleDoLetter}>희망의 메시지 전하기&nbsp;&nbsp;&nbsp;&gt;</div>
             </WrapperInner>
