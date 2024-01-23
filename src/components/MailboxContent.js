@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareNodes, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import PostIt from "./PostIt";
 
 const MainWrapper = styled.div`
     display: flex;
@@ -60,6 +61,13 @@ const ContentBox = styled.div`
     background-color: white;
     
     border-radius: 10px 10px 0px 0px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+`
+
+const ContentRow = styled.div`
+    display: flex;
 `
 
 function MailboxContent() {
@@ -86,17 +94,38 @@ function MailboxContent() {
         <MainWrapper>
             <Wrapper>
                 <Title placeholder="편지함 제목을 입력해주세요."></Title>
-                <ButtonContainer>
-                <StyledFontAwesomeIcon icon={faShareNodes} onClick={handleShare} />
+                <ButtonContainer onClick={handleShare}>
+                <StyledFontAwesomeIcon icon={faShareNodes} />
                 </ButtonContainer>
-                <ButtonContainer>
-                <StyledFontAwesomeIcon icon={faPenToSquare} onClick={handleWrite} />
+                <ButtonContainer onClick={handleWrite}>
+                <StyledFontAwesomeIcon icon={faPenToSquare} />
                 </ButtonContainer>
             </Wrapper>
         </MainWrapper>
         
         <MainWrapper>
-            <ContentBox />
+            <ContentBox>
+                <ContentRow>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                </ContentRow>
+                <ContentRow>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                </ContentRow>
+                <ContentRow>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                </ContentRow>
+                <ContentRow>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                    <PostIt></PostIt>
+                </ContentRow>
+            </ContentBox>
         </MainWrapper>
         </div>
     )

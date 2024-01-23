@@ -75,7 +75,6 @@ const CountText = styled.div`
     line-height: 24px
 `; 
 
-// TODO: 줄수 제한 (max 13)
 const WriteBox = styled.textarea`
     width: calc(350px - 20px);
     height: calc(300px - 20px);
@@ -255,6 +254,7 @@ function MailboxWrite() {
                             <Switch
                                 onChange={handleChange}
                                 checked={checked}
+                                activeBoxShadow="0px 0px 0px 0px rgba(0, 0, 0, 0)"
                                 offColor="#B0B0B0"
                                 onColor="#B0B0B0"
                                 offHandleColor="#666666"
