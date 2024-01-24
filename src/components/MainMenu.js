@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import KakaoButton from "./kakao/button"
 
@@ -82,6 +82,8 @@ const WrapperInner = styled.div`
 
 function MainMenu() {  
     const data = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
     const handleCoLetter = () => {
         if (data.login) {
@@ -89,7 +91,8 @@ function MainMenu() {
             navigate(`/mailbox/${id}`);
         }
         else {
-            KakaoButton({type: "mainMenu"});
+            const popup = true;
+            dispatch({ type: 'store/SET_POPUP_STATE', popup });
         }
     }; 
 

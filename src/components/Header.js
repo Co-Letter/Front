@@ -41,23 +41,6 @@ const Logo = styled.div`
     line-height: 21.52px;
 `;
 
-const HeaderDiv = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const HeaderText = styled.div`
-    color: #000000;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 15.65px;
-    user-select: none;
-
-    margin-right: 10px;
-    cursor: pointer;
-`;
-
 const ProfileDiv = styled.div`
     display: flex;
     align-items: center;
@@ -108,7 +91,7 @@ function Header() {
                     <HeaderMenu imgUrl={data.data.memberProfileImage}></HeaderMenu>
                 </ProfileDiv>
                 :
-                <KakaoButton type="header"></KakaoButton>}
+                <KakaoButton></KakaoButton>}
             </Container>
         </Background>
     );

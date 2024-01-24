@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import Header from "../components/Header"
 import MainMenu from "../components/MainMenu"
-// import KakaoModal from "../components/kakao/modal"
+import KakaoModal from "../components/kakao/modal"
 
 const Container = styled.div`
     width: 100%;
@@ -13,13 +14,15 @@ const Container = styled.div`
 `;
 
 function Home() {  
+    const data = useSelector((state) => state.store);
+
     return (
         <>
+        { data.popup? <KakaoModal /> : <></>}
         <Container>
             <Header />
             <MainMenu />
         </Container>
-        {/* <KakaoModal/> */}
         </>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 const HeaderDiv = styled.div`
     display: flex;
@@ -18,19 +19,17 @@ const HeaderText = styled.div`
     cursor: pointer;
 `;
 
-function KakaoButton({type}) {   
-    const Rest_api_key='97b37b5bc03aa1e4b911652ec5cfe221'
-    const redirect_uri = 'http://localhost:8080/auth'
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
-    
+function KakaoButton() {   
+    const dispatch = useDispatch();
+
     const handleLogin = () => {
-        console.log("click");
-        window.location.href = kakaoURL
+        const popup = true;
+        dispatch({ type: 'store/SET_POPUP_STATE', popup })
     }
 
     return(
         <>
-        {type === "header" ? <HeaderDiv onClick={handleLogin}><HeaderText>로그인</HeaderText></HeaderDiv> : handleLogin()}
+        <HeaderDiv onClick={handleLogin}><HeaderText>로그인</HeaderText></HeaderDiv>
         </>
     )
 }
