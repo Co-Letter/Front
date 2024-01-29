@@ -22,6 +22,10 @@ const DropdownMenu = styled.div`
     width: 160px;
     right: calc((100% - 1280px) / 2 + 10px);
     top: 70px;
+
+    @media screen and (max-width: 1280px) {
+        right: 10px;
+    }
 `;
 
 const MenuList = styled.ul`

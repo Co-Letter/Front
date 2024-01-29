@@ -20,6 +20,14 @@ const Container = styled.div`
     
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 1280px) {
+        min-width: 300px;
+        width: 100%;
+        font-size: 36px;
+        letter-spacing: 0.35px;
+        line-height: 28px;
+    }
 `
 
 const LogoDiv = styled.div`

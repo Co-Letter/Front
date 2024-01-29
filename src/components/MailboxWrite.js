@@ -22,6 +22,15 @@ const Wrapper = styled.div`
     gap: 10px;
 
     padding: 100px 0px 0px 0px;
+
+    @media screen and (max-width: 1280px) {
+        padding: 80px 0px 0px 0px;
+        
+        margin-left: 30px;
+        margin-right: 30px;
+
+        width: 100%;
+    }
 `;
 
 const ContentBox = styled.div`
@@ -30,6 +39,11 @@ const ContentBox = styled.div`
     background-color: white;
     
     border-radius: 10px;
+
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+        height: 670px;
+    }
 `
 
 const ColorPicker = styled.div`
@@ -37,6 +51,10 @@ const ColorPicker = styled.div`
     margin-top: 70px;
     width: 370px;
     height: 50px;
+
+    @media screen and (max-width: 1280px) {
+        width: 300px;
+    }
 `
 
 const ColorSelector = styled.div`
@@ -63,6 +81,11 @@ const PostIt = styled.div`
 
     margin: auto;
     margin-top: 50px;
+
+    @media screen and (max-width: 1280px) {
+        width: 300px;
+        height: 300px;
+    }
 `;
 
 const CountBox = styled.div`
@@ -99,11 +122,19 @@ const WriteBox = styled.textarea`
     &:focus {
         outline: none;
     }
+
+    @media screen and (max-width: 1280px) {
+        width: calc(300px - 20px);
+    }
 `;
 
 const NickNameBox = styled.div`
     margin-top: 10px;
     margin-right: 10px;
+
+    @media screen and (max-width: 1280px) {
+        margin-bottom: 10px;
+    }
 `;
 
 const NickNameText = styled.div`
@@ -161,6 +192,11 @@ const SubmitButton = styled.div`
 
     margin: auto;
     margin-top: 80px;
+
+    @media screen and (max-width: 1280px) {
+        margin-top: 40px;
+        width: 300px;
+    }
 `;
 
 const SubmitText = styled.div`

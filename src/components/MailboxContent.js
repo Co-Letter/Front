@@ -20,6 +20,13 @@ const Wrapper = styled.div`
     gap: 10px;
 
     padding: 100px 0px 0px 0px;
+
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+        margin-left: 30px;
+        margin-right: 30px;
+        padding: 70px 0px 0px 0px;
+    }
 `;
 
 const Title = styled.input`
@@ -37,7 +44,18 @@ const Title = styled.input`
     &:focus {
         outline: none;
     }
-`
+
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+        min-width: auto;
+        height: 30px;
+        padding: 10px;
+
+        color: #333333;
+        font-size: 16px;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+`;
 
 const ButtonContainer = styled.div`
     width: 55px;
@@ -46,6 +64,12 @@ const ButtonContainer = styled.div`
     border-radius: 50%;
 
     cursor: pointer;
+
+    @media screen and (max-width: 1280px) {
+        min-width: 36px;
+        max-width: 36px;
+        height: 36px;
+    }
 `
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
@@ -54,6 +78,13 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 
     margin-top: 12px;
     margin-left: 13px;
+
+    @media screen and (max-width: 1280px) {
+        font-size: 19px;
+
+        margin-top: 8px;
+        margin-left: 8px;
+    }
 `;
 
 const ContentBox = styled.div`
@@ -67,6 +98,14 @@ const ContentBox = styled.div`
 
     overflow-x: hidden;
     overflow-y: auto;
+
+    @media screen and (max-width: 1280px) {
+        font-size: 19px;
+        margin: 30px;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        height: calc(100vh - 220px);
+    }
 `
 
 const ContentRow = styled.div`
@@ -142,20 +181,32 @@ function MailboxContent() {
         <MainWrapper>
             <ContentBox>
                 <CountBox>총 {count}개의 메시지</CountBox>
-                {contents !== undefined && contents.length > 0 && contents.reduce((rows, content, index) => {
-                    if (index % 3 === 0) {
-                        rows.push([content]);
-                    } else {
-                        rows[rows.length - 1].push(content);
-                    }
-                    return rows;
-                }, []).map((rowContents, rowIndex) => (
-                    <ContentRow key={rowIndex}>
-                        {rowContents.map((content, contentIndex) => (
-                            <PostIt key={contentIndex} data={content} />
-                        ))}
-                    </ContentRow>
-                ))}
+                {contents !== undefined && contents.length > 0 && (
+                    <>
+                        {window.innerWidth > 1280 ? (
+                            contents.reduce((rows, content, index) => {
+                                if (index % 3 === 0) {
+                                    rows.push([content]);
+                                } else {
+                                    rows[rows.length - 1].push(content);
+                                }
+                                return rows;
+                            }, []).map((rowContents, rowIndex) => (
+                                <ContentRow key={rowIndex}>
+                                    {rowContents.map((content, contentIndex) => (
+                                        <PostIt key={contentIndex} data={content} />
+                                    ))}
+                                </ContentRow>
+                            ))
+                        ) : (
+                            contents.map((content, rowIndex) => (
+                                <ContentRow key={rowIndex}>
+                                    <PostIt key={rowIndex} data={content} />
+                                </ContentRow>
+                            ))
+                        )}
+                    </>
+                )}
             </ContentBox>
         </MainWrapper>
         </div>

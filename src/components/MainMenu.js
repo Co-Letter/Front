@@ -6,6 +6,11 @@ import styled from "styled-components";
 const MainWrapper = styled.div`
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 1280px) {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 const Wrapper = styled.div`
@@ -15,6 +20,15 @@ const Wrapper = styled.div`
     justify-content: space-between;
 
     padding: 100px 0px 0px 0px;
+
+    @media screen and (max-width: 1280px) {
+        padding: 50px 0px 0px 0px;
+
+        flex-direction: column;
+        margin: 10px;
+        width: 100%;
+        min-width: 300px;
+    }
 `;
 
 const WrapperInner = styled.div`
@@ -76,6 +90,76 @@ const WrapperInner = styled.div`
         line-height: 24.52px;
         text-align: right;
         cursor: pointer;
+    }
+
+    @media screen and (max-width: 1280px) {
+        width: calc(100% - 120px);
+        height: calc(300px - 10px);
+        font-size: 36px;
+        letter-spacing: 0.35px;
+        line-height: 28px;
+        padding: 30px 40px 10px;
+        margin: 20px;
+
+        .subtitle {
+            color: #000000;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 16.34px;
+            margin: 0px;
+        }
+    
+        .title {
+            color: #000000;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 35px;
+            font-weight: 700;
+            line-height: 47.67px;
+            margin: 0px;
+            margin-bottom: 10px;
+        }
+    
+        .description {
+            color: #000000;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 19.07px;
+            margin: 0px;
+            margin-bottom: 20px;
+        }
+    
+        .imageDiv {
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            text-align: center;
+            margin: 0 auto;
+        }
+    
+        .image {
+            max-height: 125px;
+        }
+    
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: #78B3FF;
+            width: 180px;
+            height: 35px; 
+            border-radius: 50px;
+            margin-left: auto;
+
+            color: #ffffff;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 20.43px;
+            cursor: pointer;
+        }
     }
 `;
 

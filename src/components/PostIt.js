@@ -9,12 +9,18 @@ const Container = styled.div`
     width: 370px;
     height: 370px;
 
-    background: linear-gradient(45deg, transparent 21px, #D2E5F3 0);
     background: ${props => `linear-gradient(45deg, transparent 21px, ${props.$background || '#D2E5F3'} 0)`};
 
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 1280px) {
+        width: 300px;
+        height: 300px;
+
+        background: ${props => `linear-gradient(45deg, transparent 20px, ${props.$background || '#D2E5F3'} 0)`};
+    }
 `;
 
 const WriteBox = styled.div`
@@ -37,6 +43,11 @@ const WriteBox = styled.div`
 
     overflow-x: hidden;
     overflow-y: auto;
+
+    @media screen and (max-width: 1280px) {
+        width: calc(300px - 40px);
+        height: calc(300px - 40px);
+    }
 `;
 
 const PostItDesign = styled.div`
@@ -45,11 +56,22 @@ const PostItDesign = styled.div`
     height: 30px;
     background-color: #000000;
     background: linear-gradient(45deg, transparent 21px, #8fa5b5 0);
+
+    @media screen and (max-width: 1280px) {
+        margin-top: 0px;
+        width: 30px;
+        min-height: 30px;
+    }
 `; 
 
 const NickNameBox = styled.div`
     margin-top: 10px;
     margin-right: 20px;
+
+    @media screen and (max-width: 1280px) {
+        margin-top: 5px;
+        margin-right: 10px;
+    }
 `;
 
 const NickNameText = styled.div`
