@@ -127,6 +127,8 @@ const CountBox = styled.div`
 function MailboxContent() {
     const [count, setCount] = useState(0);
     const [contents, setContents] = useState([]);
+    const [title, setTitle] = useState("");
+    const [memberId, setMemberId] = useState(0);
     const data = useSelector((state) => state.user);
 
     useEffect(() => {
@@ -138,13 +140,16 @@ function MailboxContent() {
                 setContents(result);
                 const countResult = await post.countMail(data.accessToken, id);
                 setCount(countResult);
+                const titleResult = await post.getTitle(data.accessToken, id);
+                setTitle(titleResult);
+                setMemberId(id);
             } catch (error) {
                 console.error("Effor fetching mailbox:", error);
             }
         };
 
         fetchData();
-    }, []);
+    }, [window.location.pathname]);
 
     const url = window.location.href;
     const navigate = useNavigate();
@@ -164,11 +169,16 @@ function MailboxContent() {
         navigate(`/write/${id}`);
     }
 
+    const handleChange = async (e) => {
+        setTitle(e.target.value);
+        await post.patchTitle(data.accessToken, title);
+    }
+
     return(
         <div>
         <MainWrapper>
             <Wrapper>
-                <Title placeholder="편지함 제목을 입력해주세요."></Title>
+                <Title placeholder="편지함 제목을 입력해주세요." value={title} onChange={handleChange} readOnly={memberId != data.data.memberId}></Title>
                 <ButtonContainer onClick={handleShare}>
                 <StyledFontAwesomeIcon icon={faShareNodes} />
                 </ButtonContainer>

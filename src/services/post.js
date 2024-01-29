@@ -1,5 +1,42 @@
 const url = 'http://3.36.88.85:8080';
 
+exports.getTitle = async (accessToken, id) => {
+  try {
+    const response = await fetch(`${url}/api/mailbox/getmailboxtitle/${id}`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${accessToken}`
+      },
+      mode: 'cors',
+    });
+
+    const data = await response.json();
+    return data.result.title;
+  } catch (error) {
+    console.error('Error during fetch title:', error);
+  }
+}
+
+exports.patchTitle = async (accessToken, title) => {
+  try {
+    const response = await fetch(`${url}/api/mailbox`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${accessToken}`
+      },
+      mode: 'cors',
+      body: JSON.stringify({title: title}),
+    });
+
+    const data = await response.json();
+    return data.result.title;
+  } catch (error) {
+    console.error('Error during fetch title:', error);
+  }
+}
+
 exports.countMail = async (accessToken, id) => {
     try {
       const response = await fetch(`${url}/api/mailbox/countmail/${id}`, {
