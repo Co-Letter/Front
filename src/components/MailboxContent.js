@@ -191,7 +191,8 @@ function MailboxContent() {
                         placeholder="편지함 제목을 입력해주세요."
                         value={title}
                         onChange={handleChange}
-                        readOnly={memberId !== data.data.memberId}
+                        readOnly={memberId != data.data.memberId}
+                        maxLength={15}
                     />
                     <ButtonContainer onClick={handleShare}>
                         <StyledFontAwesomeIcon icon={faShareNodes} />
