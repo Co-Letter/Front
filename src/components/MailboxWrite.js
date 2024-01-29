@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Switch from "react-switch";
+// import Switch from "react-switch";
 
 import post from '../services/post'
 
@@ -33,7 +34,7 @@ const ContentBox = styled.div`
 
 const ColorPicker = styled.div`
     margin: auto;
-    margin-top: 50px;
+    margin-top: 70px;
     width: 370px;
     height: 50px;
 `
@@ -113,38 +114,38 @@ const NickNameText = styled.div`
     line-height: 19.07px
 `;
 
-const SecretDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 370px;
-    height: 50px;
+// const SecretDiv = styled.div`
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     width: 370px;
+//     height: 50px;
 
-    background-color: #d8d8d8;
-    border-radius: 50px;
+//     background-color: #d8d8d8;
+//     border-radius: 50px;
 
-    margin: auto;
-    margin-top: 30px;
-`;
+//     margin: auto;
+//     margin-top: 30px;
+// `;
 
-const SecretText = styled.div`
-    color: #666666;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 16px;
-    line-height: 21.79px;
+// const SecretText = styled.div`
+//     color: #666666;
+//     font-family: 'Noto Sans KR', sans-serif;
+//     font-size: 16px;
+//     line-height: 21.79px;
 
-    margin: 20px;
-`;
+//     margin: 20px;
+// `;
 
-const SecretButton = styled.label`
-    margin-right: 10px;
+// const SecretButton = styled.label`
+//     margin-right: 10px;
 
-    width: 56px;
-    height: 28px;
+//     width: 56px;
+//     height: 28px;
 
-    border-radius: 50px;
-    border: 1px solid #666666;
-`;
+//     border-radius: 50px;
+//     border: 1px solid #666666;
+// `;
 
 const SubmitButton = styled.div`
     display: flex;
@@ -159,7 +160,7 @@ const SubmitButton = styled.div`
     border-radius: 15px;
 
     margin: auto;
-    margin-top: 30px;
+    margin-top: 80px;
 `;
 
 const SubmitText = styled.div`
@@ -177,9 +178,6 @@ function MailboxWrite() {
     }
 
     const [checked, setChecked] = useState(false);
-    const handleChange = () => {
-      setChecked((current) => !current);
-    };
 
     const [count, setCount] = useState(0);
     const [content, setContent] = useState("");
@@ -191,12 +189,13 @@ function MailboxWrite() {
 
     const data = useSelector((state) => state.user);
 
-    const handleSubmit = () => {
+    const navigate = useNavigate();
+    const handleSubmit = async () => {
         const url = window.location.href;
         const parts = url.split('/');
         const id = parts[parts.length - 1];
-        const result = post.sendMail(data.accessToken, id, content, checked, background);
-        console.log(result);
+        await post.sendMail(data.accessToken, id, content, checked, background);
+        navigate(`/mailbox/${id}`);
     }
 
     return(
@@ -258,7 +257,7 @@ function MailboxWrite() {
                         </NickNameBox>
                     </PostIt>
 
-                    <SecretDiv>
+                    {/* <SecretDiv>
                         <SecretText>편지함 주인만 읽기</SecretText>
                         <SecretButton>
                             <Switch
@@ -273,7 +272,8 @@ function MailboxWrite() {
                                 checkedIcon={<div></div>}
                             />
                         </SecretButton>
-                    </SecretDiv>
+                    </SecretDiv> */}
+                    
                     <SubmitButton onClick={handleSubmit}><SubmitText>편지 쓰기</SubmitText></SubmitButton>
                 </ContentBox>
             </Wrapper>

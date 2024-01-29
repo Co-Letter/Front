@@ -1,8 +1,8 @@
 const url = 'http://3.36.88.85:8080';
 
-exports.countMail = async (accessToken) => {
+exports.countMail = async (accessToken, id) => {
     try {
-      const response = await fetch(`${url}/api/mailbox/countmail`, {
+      const response = await fetch(`${url}/api/mailbox/countmail/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

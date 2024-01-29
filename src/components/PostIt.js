@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const Container = styled.div`
     display: flex;
@@ -9,8 +9,8 @@ const Container = styled.div`
     width: 370px;
     height: 370px;
 
-    background-color: #D2E5F3;
     background: linear-gradient(45deg, transparent 21px, #D2E5F3 0);
+    background: ${props => `linear-gradient(45deg, transparent 21px, ${props.$background || '#D2E5F3'} 0)`};
 
     margin: auto;
     margin-top: 20px;
@@ -62,7 +62,7 @@ const NickNameText = styled.div`
 
 function PostIt({data}) {  
     return (
-        <Container>
+        <Container $background={data.background}>
             <WriteBox>
                 {data.content}
             </WriteBox>

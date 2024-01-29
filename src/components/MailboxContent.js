@@ -97,8 +97,8 @@ function MailboxContent() {
                 const id = parts[parts.length - 1];
                 const result = await post.getMail(data.accessToken, id);
                 setContents(result);
-                // const countResult = await post.countMail(data.accessToken);
-                // setCount(countResult);
+                const countResult = await post.countMail(data.accessToken, id);
+                setCount(countResult);
             } catch (error) {
                 console.error("Effor fetching mailbox:", error);
             }
