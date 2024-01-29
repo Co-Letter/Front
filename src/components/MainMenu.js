@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import KakaoButton from "./kakao/button"
 
 const MainWrapper = styled.div`
     display: flex;

@@ -13,7 +13,8 @@ const Container = styled.div`
     background: linear-gradient(45deg, transparent 21px, #D2E5F3 0);
 
     margin: auto;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 `;
 
 const WriteBox = styled.div`
@@ -46,19 +47,7 @@ const PostItDesign = styled.div`
     background: linear-gradient(45deg, transparent 21px, #8fa5b5 0);
 `; 
 
-const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
-    color: #000000;
-    font-size: 20px;
-
-    margin-top: 2px;
-    margin-left: 40px;
-
-    cursor: pointer;
-`;
-
 const NickNameBox = styled.div`
-    display: flex;
-    justify-content: space-between;
     margin-top: 10px;
     margin-right: 20px;
 `;
@@ -72,48 +61,15 @@ const NickNameText = styled.div`
 `;
 
 function PostIt({data}) {  
-    const handleDelete = () => {
-        console.log("delete click!");
-    };
-
     return (
         <Container>
-            <WriteBox>ㅎㅇㅎㅇ
-                나랑 닭발 먹기로 했는데 왜 연락 안해?
-                왜 플젝 시작해서 나랑 안 놀아죠?
-                왜 나 물음표 살인마 만들어?
-                어? 이거 보면 당장 연락해.
-                루피 병따개 샀으니까 이걸로 맥주도 따
-                소맥 마실까? 연맥 마실까?
-                어쨌든 연락해 ㅡㅡㅎㅇㅎㅇ
-                나랑 닭발 먹기로 했는데 왜 연락 안해?
-                왜 플젝 시작해서 나랑 안 놀아죠?
-                왜 나 물음표 살인마 만들어?
-                어? 이거 보면 당장 연락해.
-                루피 병따개 샀으니까 이걸로 맥주도 따
-                소맥 마실까? 연맥 마실까?
-                어쨌든 연락해 ㅡㅡㅎㅇㅎㅇ
-                나랑 닭발 먹기로 했는데 왜 연락 안해?
-                왜 플젝 시작해서 나랑 안 놀아죠?
-                왜 나 물음표 살인마 만들어?
-                어? 이거 보면 당장 연락해.
-                루피 병따개 샀으니까 이걸로 맥주도 따
-                소맥 마실까? 연맥 마실까?
-                어쨌든 연락해 ㅡㅡ
+            <WriteBox>
+                {data.content}
             </WriteBox>
-            {/* <WriteBox>{data.content}</WriteBox> */}
-                        
-            {/* <NickNameBox>
-                <NickNameText>
-                    From. {data.data.memberNickName}
-                </NickNameText>
-            </NickNameBox> */}
-            
                         
             <NickNameBox>
-                <StyledFontAwesomeIcon icon={faTrash} onClick={handleDelete} />
                 <NickNameText>
-                    From. 새침한불그스름한얼룩말
+                    From. {data.writer}
                 </NickNameText>
             </NickNameBox>
 

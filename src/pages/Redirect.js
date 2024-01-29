@@ -15,6 +15,9 @@ const LoginHandler = () => {
         if (code) {
           const userToken = await auth.login(code);
           dispatch({ type: 'user/SET_USER_TOKEN', userToken });
+          
+          const popup = false;
+          dispatch({ type: 'store/SET_POPUP_STATE', popup });
 
           navigate("/");
         }

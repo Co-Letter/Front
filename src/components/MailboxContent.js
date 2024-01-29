@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareNodes, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import PostIt from "./PostIt";
+
+import post from "../services/post"
 
 const MainWrapper = styled.div`
     display: flex;
@@ -70,7 +73,40 @@ const ContentRow = styled.div`
     display: flex;
 `
 
+const CountBox = styled.div`
+    margin-top: 20px;
+    margin-right: 25px;
+    text-align: right;
+
+    color: #000000;
+    font-family: 'Aldrich', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+`
+
 function MailboxContent() {
+    const [count, setCount] = useState(0);
+    const [contents, setContents] = useState([]);
+    const data = useSelector((state) => state.user);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const parts = url.split('/');
+                const id = parts[parts.length - 1];
+                const result = await post.getMail(data.accessToken, id);
+                setContents(result);
+                // const countResult = await post.countMail(data.accessToken);
+                // setCount(countResult);
+            } catch (error) {
+                console.error("Effor fetching mailbox:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     const url = window.location.href;
     const navigate = useNavigate();
     const handleShare = () => {
@@ -105,26 +141,21 @@ function MailboxContent() {
         
         <MainWrapper>
             <ContentBox>
-                <ContentRow>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                </ContentRow>
-                <ContentRow>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                </ContentRow>
-                <ContentRow>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                </ContentRow>
-                <ContentRow>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                    <PostIt></PostIt>
-                </ContentRow>
+                <CountBox>총 {count}개의 메시지</CountBox>
+                {contents !== undefined && contents.length > 0 && contents.reduce((rows, content, index) => {
+                    if (index % 3 === 0) {
+                        rows.push([content]);
+                    } else {
+                        rows[rows.length - 1].push(content);
+                    }
+                    return rows;
+                }, []).map((rowContents, rowIndex) => (
+                    <ContentRow key={rowIndex}>
+                        {rowContents.map((content, contentIndex) => (
+                            <PostIt key={contentIndex} data={content} />
+                        ))}
+                    </ContentRow>
+                ))}
             </ContentBox>
         </MainWrapper>
         </div>

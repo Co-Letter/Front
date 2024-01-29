@@ -7,6 +7,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Switch from "react-switch";
 
+import post from '../services/post'
+
 const MainWrapper = styled.div`
     display: flex;
     justify-content: center;
@@ -189,6 +191,14 @@ function MailboxWrite() {
 
     const data = useSelector((state) => state.user);
 
+    const handleSubmit = () => {
+        const url = window.location.href;
+        const parts = url.split('/');
+        const id = parts[parts.length - 1];
+        const result = post.sendMail(data.accessToken, id, content, checked, background);
+        console.log(result);
+    }
+
     return(
         <div>
         <MainWrapper>
@@ -264,7 +274,7 @@ function MailboxWrite() {
                             />
                         </SecretButton>
                     </SecretDiv>
-                    <SubmitButton><SubmitText>편지 쓰기</SubmitText></SubmitButton>
+                    <SubmitButton onClick={handleSubmit}><SubmitText>편지 쓰기</SubmitText></SubmitButton>
                 </ContentBox>
             </Wrapper>
         </MainWrapper>
