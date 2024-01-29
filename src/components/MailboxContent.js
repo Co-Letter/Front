@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareNodes, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import PostIt from "./PostIt";
-
-import post from "../services/post"
+import post from "../services/post";
 
 const MainWrapper = styled.div`
     display: flex;
@@ -129,6 +128,7 @@ function MailboxContent() {
     const [contents, setContents] = useState([]);
     const [title, setTitle] = useState("");
     const [memberId, setMemberId] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const data = useSelector((state) => state.user);
 
     useEffect(() => {
@@ -148,7 +148,16 @@ function MailboxContent() {
             }
         };
 
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
         fetchData();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, [window.location.pathname]);
 
     const url = window.location.href;
@@ -174,53 +183,58 @@ function MailboxContent() {
         await post.patchTitle(data.accessToken, title);
     }
 
-    return(
+    return (
         <div>
-        <MainWrapper>
-            <Wrapper>
-                <Title placeholder="편지함 제목을 입력해주세요." value={title} onChange={handleChange} readOnly={memberId != data.data.memberId}></Title>
-                <ButtonContainer onClick={handleShare}>
-                <StyledFontAwesomeIcon icon={faShareNodes} />
-                </ButtonContainer>
-                <ButtonContainer onClick={handleWrite}>
-                <StyledFontAwesomeIcon icon={faPenToSquare} />
-                </ButtonContainer>
-            </Wrapper>
-        </MainWrapper>
-        
-        <MainWrapper>
-            <ContentBox>
-                <CountBox>총 {count}개의 메시지</CountBox>
-                {contents !== undefined && contents.length > 0 && (
-                    <>
-                        {window.innerWidth > 1280 ? (
-                            contents.reduce((rows, content, index) => {
-                                if (index % 3 === 0) {
-                                    rows.push([content]);
-                                } else {
-                                    rows[rows.length - 1].push(content);
-                                }
-                                return rows;
-                            }, []).map((rowContents, rowIndex) => (
-                                <ContentRow key={rowIndex}>
-                                    {rowContents.map((content, contentIndex) => (
-                                        <PostIt key={contentIndex} data={content} />
-                                    ))}
-                                </ContentRow>
-                            ))
-                        ) : (
-                            contents.map((content, rowIndex) => (
-                                <ContentRow key={rowIndex}>
-                                    <PostIt key={rowIndex} data={content} />
-                                </ContentRow>
-                            ))
-                        )}
-                    </>
-                )}
-            </ContentBox>
-        </MainWrapper>
+            <MainWrapper>
+                <Wrapper>
+                    <Title
+                        placeholder="편지함 제목을 입력해주세요."
+                        value={title}
+                        onChange={handleChange}
+                        readOnly={memberId !== data.data.memberId}
+                    />
+                    <ButtonContainer onClick={handleShare}>
+                        <StyledFontAwesomeIcon icon={faShareNodes} />
+                    </ButtonContainer>
+                    <ButtonContainer onClick={handleWrite}>
+                        <StyledFontAwesomeIcon icon={faPenToSquare} />
+                    </ButtonContainer>
+                </Wrapper>
+            </MainWrapper>
+
+            <MainWrapper>
+                <ContentBox>
+                    <CountBox>총 {count}개의 메시지</CountBox>
+                    {contents !== undefined && contents.length > 0 && (
+                        <>
+                            {windowWidth > 1280 ? (
+                                contents.reduce((rows, content, index) => {
+                                    if (index % 3 === 0) {
+                                        rows.push([content]);
+                                    } else {
+                                        rows[rows.length - 1].push(content);
+                                    }
+                                    return rows;
+                                }, []).map((rowContents, rowIndex) => (
+                                    <ContentRow key={rowIndex}>
+                                        {rowContents.map((content, contentIndex) => (
+                                            <PostIt key={contentIndex} data={content} />
+                                        ))}
+                                    </ContentRow>
+                                ))
+                            ) : (
+                                contents.map((content, rowIndex) => (
+                                    <ContentRow key={rowIndex}>
+                                        <PostIt key={rowIndex} data={content} />
+                                    </ContentRow>
+                                ))
+                            )}
+                        </>
+                    )}
+                </ContentBox>
+            </MainWrapper>
         </div>
-    )
+    );
 }
 
 export default MailboxContent;
