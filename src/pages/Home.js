@@ -11,6 +11,10 @@ const Container = styled.div`
     min-height: 100vh;
     background: #A2C4F1;
     margin: 0px;
+
+    @media screen and (max-width: 1280px) {
+        height: 100%;
+    }
 `;
 
 function Home() {  

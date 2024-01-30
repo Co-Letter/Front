@@ -93,12 +93,12 @@ const WrapperInner = styled.div`
     }
 
     @media screen and (max-width: 1280px) {
-        width: calc(100% - 120px);
+        width: calc(100% - 60px);
         height: calc(300px - 10px);
         font-size: 36px;
         letter-spacing: 0.35px;
         line-height: 28px;
-        padding: 30px 40px 10px;
+        padding: 20px 10px 10px;
         margin: 20px;
 
         .subtitle {
