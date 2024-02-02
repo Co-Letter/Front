@@ -65,7 +65,7 @@ function KakaoModal() {
     }    
 
     const Rest_api_key='97b37b5bc03aa1e4b911652ec5cfe221'
-    const redirect_uri = 'http://localhost:8080/auth'
+    const redirect_uri = 'https://co-letter.swygbro.com/auth'
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`
 
     const handleClick = () => {
