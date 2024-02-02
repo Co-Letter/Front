@@ -24,6 +24,11 @@ const ModalDiv = styled.div`
     height: 630px;
     border-radius: 10px;
     background: #ffffff;
+
+    @media screen and (max-width: 1280px) {
+        width: 300px;
+        height: 300px;
+    }
 `;
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
@@ -34,6 +39,11 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
     padding: 20px;
 
     cursor: pointer;
+
+    @media screen and (max-width: 1280px) {
+        padding: 10px;
+        font-size: 25px;
+    }
 `;
 
 const Description = styled.div`
@@ -45,6 +55,14 @@ const Description = styled.div`
     line-height: 43.58px;
 
     padding: 90px;
+
+    @media screen and (max-width: 1280px) {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 19.07px;
+
+        padding: 50px;
+    }
 `;
 
 const Button = styled.img`
@@ -54,6 +72,10 @@ const Button = styled.img`
 
     margin-top: 60px;
     cursor: pointer;
+
+    @media screen and (max-width: 1280px) {
+        width: 280px;
+    }
 `
 
 function KakaoModal() {       

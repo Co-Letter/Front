@@ -17,6 +17,10 @@ const HeaderText = styled.div`
 
     margin-right: 10px;
     cursor: pointer;
+
+    @media screen and (max-width: 1280px) {
+        font-size: 14px;
+    }
 `;
 
 function KakaoButton() {   

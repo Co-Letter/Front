@@ -47,6 +47,10 @@ const Logo = styled.div`
     font-size: 22px;
     font-weight: 400;
     line-height: 21.52px;
+
+    @media screen and (max-width: 1280px) {
+        font-size: 18px;
+    }
 `;
 
 const ProfileDiv = styled.div`
@@ -60,6 +64,10 @@ const NickName = styled.div`
     font-size: 16px;
     font-weight: 400;
     line-height: 15.65px;
+
+    @media screen and (max-width: 1280px) {
+        font-size: 14px;
+    }
 `;
 
 function Header() {
