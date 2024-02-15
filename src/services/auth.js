@@ -1,4 +1,4 @@
-const url = 'http://3.36.88.85:8080';
+const url = 'http://43.200.4.132:8080';
 
 exports.login = async (code) => {
     try {
