@@ -1,4 +1,4 @@
-const url = 'http://43.200.4.132:8080';
+const url = 'https://cocooletter.shop';
 
 exports.getProfile = async (accessToken) => {
   try {
